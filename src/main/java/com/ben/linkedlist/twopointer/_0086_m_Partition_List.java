@@ -42,6 +42,7 @@ public class _0086_m_Partition_List {
 
             ListNode cur = dummy;
 
+            //Find the first place bigger than/equals to X, as the place to insert
             ListNode nodeToInsertAfter = null;
             while (cur.next != null) {
                 if (cur.next.val >= x) {
@@ -50,16 +51,6 @@ public class _0086_m_Partition_List {
                 }
                 cur = cur.next;
             }
-
-            //Find the position of x
-            while (cur.next != null) {
-                if (cur.next.val == x) {
-                    break;
-                }
-                cur = cur.next;
-            }
-
-            cur = cur.next;
 
             while (cur.next != null) {
                 if (cur.next.val < x) {
