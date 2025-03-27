@@ -15,7 +15,7 @@ public class _0086_m_Partition_List {
         head.next.next.next.next.next = new ListNode(2);
 
         PrintUtil.printListNode(head);
-        Solution solution = new Solution();
+        Solution2 solution = new Solution2();
         ListNode newHead = solution.partition(head, x);
         PrintUtil.printListNode(newHead);
     }
@@ -75,5 +75,43 @@ public class _0086_m_Partition_List {
             nodeToInsert.next = nodeToInsertAfter.next;
             nodeToInsertAfter.next = nodeToInsert;
         }
+    }
+
+    static class Solution2 {
+        public ListNode partition(ListNode head, int x) {
+            if (head == null || head.next == null) {
+                return head;
+            }
+
+            ListNode dummy1 = new ListNode(0);
+            ListNode dummy2 = new ListNode(0);
+
+            //All the nodes smaller than x
+            ListNode p1 = dummy1;
+            //Other nodes
+            ListNode p2 = dummy2;
+
+            ListNode cur = head;
+
+            while (cur != null) {
+                if (cur.val < x) {
+                    p1.next = cur;
+                    p1 = p1.next;
+                } else {
+                    p2.next = cur;
+                    p2 = p2.next;
+                }
+                cur = cur.next;
+            }
+
+            //We have loop through the whole link, and created two links. need to break the incorrect relation of original link
+            p1.next = null;
+            p2.next = null;
+
+            p1.next = dummy2.next;
+
+            return dummy1.next;
+        }
+
     }
 }
